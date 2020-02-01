@@ -15,12 +15,14 @@ public class DiffWaysToCompute {
     private List<Integer> partition(String input) {
         List<Integer> res = new ArrayList<Integer>();
         if (!input.contains("+") && !input.contains("-") && !input.contains("*")) {
-            res.add(Integer.valueOf(input));
+            if (!input.equals("")) {
+                res.add(Integer.valueOf(input));
+            }
             return res;
         }
 
         for (int i = 0; i < input.length(); ++i) {
-            if (!input.contains("+") || !input.contains("-") || !input.contains("*")) {
+            if (input.contains("+") || input.contains("-") || input.contains("*")) {
                 for (int left : partition(input.substring(0,i))) {
                     for (int right : partition(input.substring(i+1))) {
                         if (input.charAt(i) == '+') {
